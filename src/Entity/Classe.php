@@ -16,10 +16,6 @@ class Classe
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'classe')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Matiere $matiere = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -33,18 +29,6 @@ class Classe
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getMatiere(): ?Matiere
-    {
-        return $this->matiere;
-    }
-
-    public function setMatiere(?Matiere $matiere): self
-    {
-        $this->matiere = $matiere;
 
         return $this;
     }

@@ -13,23 +13,27 @@ class Seance
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'seance')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Affectation $affectation = null;
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    public function __construct(int $id){
+        $this->nom="S$id";
+        
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAffectation(): ?Affectation
+    public function getNom(): ?string
     {
-        return $this->affectation;
+        return $this->nom;
     }
 
-    public function setAffectation(?Affectation $affectation): self
+    public function setNom(string $nom): self
     {
-        $this->affectation = $affectation;
+        $this->nom = $nom;
 
         return $this;
     }

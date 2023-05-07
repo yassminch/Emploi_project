@@ -21,18 +21,6 @@ class Matiere
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\OneToMany(mappedBy: 'matiere', targetEntity: Classe::class)]
-    private Collection $classe;
-
-    #[ORM\ManyToOne(inversedBy: 'matiere')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Affectation $affectation = null;
-
-    public function __construct()
-    {
-        $this->classe = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -58,48 +46,6 @@ class Matiere
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Classe>
-     */
-    public function getClasse(): Collection
-    {
-        return $this->classe;
-    }
-
-    public function addClasse(Classe $classe): self
-    {
-        if (!$this->classe->contains($classe)) {
-            $this->classe->add($classe);
-            $classe->setMatiere($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClasse(Classe $classe): self
-    {
-        if ($this->classe->removeElement($classe)) {
-            // set the owning side to null (unless already changed)
-            if ($classe->getMatiere() === $this) {
-                $classe->setMatiere(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getAffectation(): ?Affectation
-    {
-        return $this->affectation;
-    }
-
-    public function setAffectation(?Affectation $affectation): self
-    {
-        $this->affectation = $affectation;
 
         return $this;
     }
